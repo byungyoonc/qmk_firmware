@@ -1,5 +1,7 @@
 /*
  * Copyright 2018 Jack Humbert <jack.humb@gmail.com>
+ * Copyright 2017 Alex Ong<the.onga@gmail.com>
+ * Copyright 2021 Simon Arlott
  * Copyright 2021 Choi Byungyoon <byungyoonc@gmail.com>
  *
  * This program is free software: you can redistribute it and/or modify
