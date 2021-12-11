@@ -142,7 +142,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * ,-----------------------------------------------------------------------------------.
  * |NK_TOG|      |      |      |      |      |      |      |      |      |      |Reset |
  * |------+------+------+------+------+------+------+------+------+------+------+------|
- * | SEC1 | SEC2 |      |      |      |      |      |      |      |      |      |      |
+ * | SEC1 | SEC2 |      |      |      |      |      |      |      |      |      |Debug |
  * |------+------+------+------+------+------+------+------+------+------+------+------|
  * |      |      |      |      |      |      |      |      |      |      |      |      |
  * |------+------+------+------+------+------+------+------+------+------+------+------|
@@ -151,7 +151,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  */
 [_ADJUST] = LAYOUT_planck_2x2u(
     NK_TOGG, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, RESET,
-    SEC_1,   SEC_2,   XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
+    SEC_1,   SEC_2,   XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, DEBUG,
     XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
     XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,          QWERTY,  GAME,             XXXXXXX, XXXXXXX, XXXXXXX, ADJUST
 )
@@ -205,7 +205,6 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     switch (keycode) {
         case SEC_1 ... SEC_2:
             if (!record->event.pressed) {
-                clear_oneshot_layer_state(ONESHOT_OTHER_KEY_PRESSED);
                 send_string_with_delay(secrets[keycode - SEC_1], 20);
             }
             return false;
