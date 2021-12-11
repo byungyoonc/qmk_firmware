@@ -1,2 +1,4 @@
-DEBOUNCE_TYPE = sym_eager_pk
 KEY_OVERRIDE_ENABLE = yes
+CUSTOM_MATRIX = yes
+
+SRC += matrix.c
