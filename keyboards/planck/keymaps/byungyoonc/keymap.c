@@ -49,6 +49,7 @@ enum planck_keycodes {
 #define GAME_WASD DF(_GAME_WASD)
 #define LSFTCAP LT(_QWERTY, KC_LSFT)
 #define RSFTCAP LT(_QWERTY, KC_RSFT)
+#define NMNVLK TG(_NUMNAV)
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
@@ -114,14 +115,14 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * |------+------+------+------+------+------+------+------+------+------+------+------|
  * | LSft |   9  |   0  |      |      |      |      |   1  |   2  |   3  |  Up  | End  |
  * |------+------+------+------+------+------+------+------+------+------+------+------|
- * | LCtl | LGUI | LAlt |      |   NUMNAV    |      0      | Num. | Left | Down |Right |
+ * | LCtl | LGUI | LAlt | LOCK |   NUMNAV    |      0      | Num. | Left | Down |Right |
  * `-----------------------------------------------------------------------------------'
  */
 [_NUMNAV] = LAYOUT_planck_2x2u(
     KC_TAB , KC_1   , KC_2   , KC_3   , KC_4   , KC_CAPS, KC_NLCK, KC_7   , KC_8   , KC_9   , KC_PMNS, KC_BSPC,
     KC_ESC , KC_5   , KC_6   , KC_7   , KC_8   , KC_NO  , KC_NO  , KC_4   , KC_5   , KC_6   , KC_PPLS, KC_HOME,
     KC_LSFT, KC_9   , KC_0   , KC_NO  , KC_NO  , KC_NO  , KC_NO  , KC_1   , KC_2   , KC_3   , KC_UP  , KC_END ,
-    KC_LCTL, KC_LGUI, KC_LALT, XXXXXXX,          NUMNAV , KC_0            , KC_PDOT, KC_LEFT, KC_DOWN, KC_RGHT
+    KC_LCTL, KC_LGUI, KC_LALT, NMNVLK,           NUMNAV , KC_0            , KC_PDOT, KC_LEFT, KC_DOWN, KC_RGHT
 ),
 
 /* Shifted
