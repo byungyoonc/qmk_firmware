@@ -68,7 +68,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     KC_TAB,  KC_Q,    KC_W,    KC_E,    KC_R,    KC_T,    KC_Y,    KC_U,    KC_I,    KC_O,    KC_P,    KC_BSPC,
     KC_ESC,  KC_A,    KC_S,    KC_D,    KC_F,    KC_G,    KC_H,    KC_J,    KC_K,    KC_L,    KC_SCLN, KC_ENT ,
     KC_LSFT, KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,    KC_N,    KC_M,    KC_COMM, KC_DOT,  KC_SLSH, KC_RSFT,
-    KC_LCTL, KC_LGUI, KC_LALT, XXXXXXX,    NUMNAV_SPC,    SHIFTED_SPC,      KC_RALT, XXXXXXX, FUNCTION,ADJUST
+    KC_LCTL, KC_LGUI, KC_LALT, NMNVLK,     NUMNAV_SPC,    SHIFTED_SPC,      KC_RALT, XXXXXXX, FUNCTION,ADJUST
 ),
 
 /* GAMING WITH SPLIT SPACE FUNCTIONS DIFFERENTLY
@@ -115,14 +115,14 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * |------+------+------+------+------+------+------+------+------+------+------+------|
  * | LSft |   9  |   0  |      |      |      |      |   1  |   2  |   3  |  Up  | End  |
  * |------+------+------+------+------+------+------+------+------+------+------+------|
- * | LCtl | LGUI | LAlt | LOCK |   NUMNAV    |      0      | Num. | Left | Down |Right |
+ * | LCtl | LGUI | LAlt |      |   NUMNAV    |      0      | Num. | Left | Down |Right |
  * `-----------------------------------------------------------------------------------'
  */
 [_NUMNAV] = LAYOUT_planck_2x2u(
     KC_TAB , KC_1   , KC_2   , KC_3   , KC_4   , KC_CAPS, KC_NLCK, KC_7   , KC_8   , KC_9   , KC_PMNS, KC_BSPC,
     KC_ESC , KC_5   , KC_6   , KC_7   , KC_8   , KC_NO  , KC_NO  , KC_4   , KC_5   , KC_6   , KC_PPLS, KC_HOME,
     KC_LSFT, KC_9   , KC_0   , KC_NO  , KC_NO  , KC_NO  , KC_NO  , KC_1   , KC_2   , KC_3   , KC_UP  , KC_END ,
-    KC_LCTL, KC_LGUI, KC_LALT, NMNVLK,           NUMNAV , KC_0            , KC_PDOT, KC_LEFT, KC_DOWN, KC_RGHT
+    KC_LCTL, KC_LGUI, KC_LALT, NMNVLK ,           NUMNAV , KC_0            , KC_PDOT, KC_LEFT, KC_DOWN, KC_RGHT
 ),
 
 /* Shifted
