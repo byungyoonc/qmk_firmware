@@ -19,7 +19,8 @@
 
 enum planck_layers {
   _QWERTY,
-  _GAME,
+  _GAME_SPC,
+  _GAME_WASD,
   _NUMNAV,
   _SHIFTED,
   _FUNCTION,
@@ -28,7 +29,8 @@ enum planck_layers {
 
 enum planck_keycodes {
   QWERTY = SAFE_RANGE,
-  GAME,
+  GAME_SPC,
+  GAME_WASD,
   SEC_1,
   SEC_2,
   BACKLIT,
@@ -39,10 +41,12 @@ enum planck_keycodes {
 #define SHIFTED MO(_SHIFTED)
 #define NUMNAV_SPC LT(_NUMNAV, KC_SPC)
 #define SHIFTED_SPC LT(_SHIFTED, KC_SPC)
+#define ADJUST_SPC LT(_ADJUST, KC_SPC)
 #define FUNCTION MO(_FUNCTION)
 #define ADJUST MO(_ADJUST)
 #define QWERTY DF(_QWERTY)
-#define GAME DF(_GAME)
+#define GAME_SPC DF(_GAME_SPC)
+#define GAME_WASD DF(_GAME_WASD)
 #define LSFTCAP LT(_QWERTY, KC_LSFT)
 #define RSFTCAP LT(_QWERTY, KC_RSFT)
 
@@ -66,7 +70,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     KC_LCTL, KC_LGUI, KC_LALT, XXXXXXX,    NUMNAV_SPC,    SHIFTED_SPC,      KC_RALT, XXXXXXX, FUNCTION,ADJUST
 ),
 
-/* GAMING
+/* GAMING WITH SPLIT SPACE FUNCTIONS DIFFERENTLY
  * ,-----------------------------------------------------------------------------------.
  * | Tab  |   Q  |   W  |   E  |   R  |   T  |   Y  |   U  |   I  |   O  |   P  | Bksp |
  * |------+------+------+------+------+------+------+------+------+------+------+------|
@@ -77,11 +81,29 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * | LCtl |      | LAlt |      |    Num_1    |    Num_3    | RAlt |      |  Fn  | ADJS |
  * `-----------------------------------------------------------------------------------'
  */
-[_GAME] = LAYOUT_planck_2x2u(
+[_GAME_SPC] = LAYOUT_planck_2x2u(
     KC_TAB,  KC_Q,    KC_W,    KC_E,    KC_R,    KC_T,    KC_Y,    KC_U,    KC_I,    KC_O,    KC_P,    KC_BSPC,
     KC_ESC,  KC_A,    KC_S,    KC_D,    KC_F,    KC_G,    KC_H,    KC_J,    KC_K,    KC_L,    KC_SCLN, KC_ENT ,
     KC_LSFT, KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,    KC_N,    KC_M,    KC_COMM, KC_DOT,  KC_SLSH, KC_RSFT,
     KC_LCTL, XXXXXXX, KC_LALT, XXXXXXX,          KC_P1,   KC_P3,            KC_RALT, XXXXXXX, FUNCTION,ADJUST
+),
+
+/* GAMING WITH WASD, NUMROW
+ * ,-----------------------------------------------------------------------------------.
+ * | Esc  |   1  |   2  |   3  |   4  |   5  |   6  |   7  |   8  |   9  |   0  | Bksp |
+ * |------+------+------+------+------+------+------+------+------+------+------+------|
+ * | Tab  |   Q  |   W  |   E  |   R  |   T  |   Y  |  Up  |   I  |   O  |   P  |Enter |
+ * |------+------+------+------+------+------+------+------+------+------+------+------|
+ * | LSft |   A  |   S  |   D  |   F  |   G  | Left | Down |Right |   L  |   ;  | ATAB |
+ * |------+------+------+------+------+------+------+------+------+------+------+------|
+ * | LCtl |   Z  |   X  |   C  |    Space    |      V      |   M  |   .  |   /  | ADJS |
+ * `-----------------------------------------------------------------------------------'
+ */
+[_GAME_WASD] = LAYOUT_planck_2x2u(
+    KC_ESC,  KC_1,    KC_2,    KC_3,    KC_4,    KC_5,    KC_6,    KC_7,    KC_8,    KC_9,    KC_0,    KC_BSPC,
+    KC_TAB,  KC_Q,    KC_W,    KC_E,    KC_R,    KC_T,    KC_Y,    KC_UP,   KC_I,    KC_O,    KC_P,    KC_ENT,
+    KC_LSFT, KC_A,    KC_S,    KC_D,    KC_F,    KC_G,    KC_LEFT, KC_DOWN, KC_RGHT, KC_L,    KC_SCLN, A(KC_TAB),
+    KC_LCTL, KC_Z,    KC_X,    KC_C,           KC_SPC,    KC_V,             KC_M,    KC_DOT,  KC_SLSH, ADJUST
 ),
 
 /* Num/Nav
@@ -146,14 +168,14 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * |------+------+------+------+------+------+------+------+------+------+------+------|
  * |      |      |      |      |      |      |      |      |      |      |      |      |
  * |------+------+------+------+------+------+------+------+------+------+------+------|
- * |      |      |      |      |   TYPING    |   GAMING    |      |      |      | ADJS |
+ * |QWERTY|GMNG1 |GMNG2 |      |             |             |      |      |      | ADJS |
  * `-----------------------------------------------------------------------------------'
  */
 [_ADJUST] = LAYOUT_planck_2x2u(
     NK_TOGG, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, RESET,
     SEC_1,   SEC_2,   XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, DEBUG,
     XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
-    XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,          QWERTY,  GAME,             XXXXXXX, XXXXXXX, XXXXXXX, ADJUST
+    QWERTY,  GAME_SPC,GAME_WASD,XXXXXXX,         XXXXXXX, XXXXXXX,          XXXXXXX, XXXXXXX, XXXXXXX, ADJUST
 )
 
 };
@@ -161,11 +183,13 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 const key_override_t pmns_key_override = ko_make_basic(MOD_MASK_SHIFT, KC_PMNS, KC_PSLS);
 const key_override_t ppls_key_override = ko_make_basic(MOD_MASK_SHIFT, KC_PPLS, KC_PAST);
 const key_override_t delete_key_override = ko_make_basic(MOD_MASK_SHIFT, KC_BSPC, KC_DEL);
+const key_override_t one_key_override = ko_make_with_layers(MOD_MASK_SHIFT, KC_1, KC_F1, (1 << _GAME_WASD));
 
 const key_override_t **key_overrides = (const key_override_t *[]){
     &pmns_key_override,
     &ppls_key_override,
     &delete_key_override,
+    &one_key_override,
     NULL
 };
 
