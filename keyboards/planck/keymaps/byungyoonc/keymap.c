@@ -21,6 +21,7 @@ enum planck_layers {
   _QWERTY,
   _GAME_SPC,
   _GAME_WASD,
+  _NAV,
   _NUMNAV,
   _SHIFTED,
   _FUNCTION,
@@ -39,17 +40,12 @@ enum planck_keycodes {
 
 #define NUMNAV MO(_NUMNAV)
 #define SHIFTED MO(_SHIFTED)
-#define NUMNAV_SPC LT(_NUMNAV, KC_SPC)
-#define SHIFTED_SPC LT(_SHIFTED, KC_SPC)
-#define ADJUST_SPC LT(_ADJUST, KC_SPC)
 #define FUNCTION MO(_FUNCTION)
 #define ADJUST MO(_ADJUST)
 #define QWERTY DF(_QWERTY)
 #define GAME_SPC DF(_GAME_SPC)
 #define GAME_WASD DF(_GAME_WASD)
-#define LSFTCAP LT(_QWERTY, KC_LSFT)
-#define RSFTCAP LT(_QWERTY, KC_RSFT)
-#define NMNVLK TG(_NUMNAV)
+#define NAVLOCK TG(_NAV)
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
@@ -61,14 +57,14 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * |------+------+------+------+------+------+------+------+------+------+------+------|
  * | LSft |   Z  |   X  |   C  |   V  |   B  |   N  |   M  |   ,  |   .  |   /  | RSft |
  * |------+------+------+------+------+------+------+------+------+------+------+------|
- * | LCtl | LGUI | LAlt |      | NMNV/Space  | SFTD/Space  | RAlt |      |  Fn  | ADJS |
+ * | LCtl | LGUI | LAlt |NAVLCK|NUMNAV|    Space    |SHFTED| RAlt |      |  Fn  | ADJS |
  * `-----------------------------------------------------------------------------------'
  */
-[_QWERTY] = LAYOUT_planck_2x2u(
+[_QWERTY] = LAYOUT_planck_grid(
     KC_TAB,  KC_Q,    KC_W,    KC_E,    KC_R,    KC_T,    KC_Y,    KC_U,    KC_I,    KC_O,    KC_P,    KC_BSPC,
     KC_ESC,  KC_A,    KC_S,    KC_D,    KC_F,    KC_G,    KC_H,    KC_J,    KC_K,    KC_L,    KC_SCLN, KC_ENT ,
     KC_LSFT, KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,    KC_N,    KC_M,    KC_COMM, KC_DOT,  KC_SLSH, KC_RSFT,
-    KC_LCTL, KC_LGUI, KC_LALT, NMNVLK,     NUMNAV_SPC,    SHIFTED_SPC,      KC_RALT, XXXXXXX, FUNCTION,ADJUST
+    KC_LCTL, KC_LGUI, KC_LALT, NAVLOCK, NUMNAV,  KC_SPC,  KC_SPC,  SHIFTED, KC_RALT, XXXXXXX, FUNCTION,ADJUST
 ),
 
 /* GAMING WITH SPLIT SPACE FUNCTIONS DIFFERENTLY
@@ -79,14 +75,14 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * |------+------+------+------+------+------+------+------+------+------+------+------|
  * | LSft |   Z  |   X  |   C  |   V  |   B  |   N  |   M  |   ,  |   .  |   /  | RSft |
  * |------+------+------+------+------+------+------+------+------+------+------+------|
- * | LCtl |      | LAlt |      |    Num_1    |    Num_3    | RAlt |      |  Fn  | ADJS |
+ * | LCtl |      | LAlt |NAVLCK| Num1 |    Space    | Num3 | RAlt |      |  Fn  | ADJS |
  * `-----------------------------------------------------------------------------------'
  */
-[_GAME_SPC] = LAYOUT_planck_2x2u(
+[_GAME_SPC] = LAYOUT_planck_grid(
     KC_TAB,  KC_Q,    KC_W,    KC_E,    KC_R,    KC_T,    KC_Y,    KC_U,    KC_I,    KC_O,    KC_P,    KC_BSPC,
     XXXXXXX, KC_A,    KC_S,    KC_D,    KC_F,    KC_G,    KC_H,    KC_J,    KC_K,    KC_L,    KC_SCLN, KC_ENT ,
     KC_LSFT, KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,    KC_N,    KC_M,    KC_COMM, KC_DOT,  KC_SLSH, KC_RSFT,
-    KC_LCTL, XXXXXXX, KC_LALT, XXXXXXX,          KC_P1,   KC_P3,            KC_RALT, XXXXXXX, FUNCTION,ADJUST
+    KC_LCTL, XXXXXXX, KC_LALT, NAVLOCK, KC_P1, KC_SPC,  KC_SPC,   KC_P3,    KC_RALT, XXXXXXX, FUNCTION,ADJUST
 ),
 
 /* GAMING WITH WASD, NUMROW
@@ -97,14 +93,21 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * |------+------+------+------+------+------+------+------+------+------+------+------|
  * | LSft |   A  |   S  |   D  |   F  |   G  | Left | Down |Right |   L  |   ;  | ATAB |
  * |------+------+------+------+------+------+------+------+------+------+------+------|
- * | LCtl |   Z  |   X  |   C  |    Space    |      V      |   M  |   .  |   /  | ADJS |
+ * | LCtl |   Z  |   X  |   C  |   V  |    Space    |   M  |   ,  |   .  |   /  | ADJS |
  * `-----------------------------------------------------------------------------------'
  */
-[_GAME_WASD] = LAYOUT_planck_2x2u(
+[_GAME_WASD] = LAYOUT_planck_grid(
     KC_ESC,  KC_1,    KC_2,    KC_3,    KC_4,    KC_5,    KC_6,    KC_7,    KC_8,    KC_9,    KC_0,    KC_BSPC,
     KC_TAB,  KC_Q,    KC_W,    KC_E,    KC_R,    KC_T,    KC_Y,    KC_UP,   KC_I,    KC_O,    KC_P,    KC_ENT,
     KC_LSFT, KC_A,    KC_S,    KC_D,    KC_F,    KC_G,    KC_LEFT, KC_DOWN, KC_RGHT, KC_L,    KC_SCLN, A(KC_TAB),
-    KC_LCTL, KC_Z,    KC_X,    KC_C,           KC_SPC,    KC_V,             KC_M,    KC_DOT,  KC_SLSH, ADJUST
+    KC_LCTL, KC_Z,    KC_X,    KC_C,    KC_V,    KC_SPC,  KC_SPC,  KC_M,    KC_COMM, KC_DOT,  KC_SLSH, ADJUST
+),
+
+[_NAV] = LAYOUT_planck_grid(
+    _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______,
+    _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______,
+    _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, KC_UP,   _______,
+    _______, _______, _______, _______, _______, _______, _______, _______, _______, KC_LEFT, KC_DOWN, KC_RGHT
 ),
 
 /* Num/Nav
@@ -115,14 +118,14 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * |------+------+------+------+------+------+------+------+------+------+------+------|
  * | LSft |   9  |   0  |      |      |      |      |   1  |   2  |   3  |  Up  | End  |
  * |------+------+------+------+------+------+------+------+------+------+------+------|
- * | LCtl | LGUI | LAlt |      |   NUMNAV    |      0      | Num. | Left | Down |Right |
+ * | LCtl | LGUI | LAlt |NAVLCK|NUMNAV|      0      |SHFTED| Num. | Left | Down |Right |
  * `-----------------------------------------------------------------------------------'
  */
-[_NUMNAV] = LAYOUT_planck_2x2u(
+[_NUMNAV] = LAYOUT_planck_grid(
     KC_TAB , KC_1   , KC_2   , KC_3   , KC_4   , KC_CAPS, KC_NLCK, KC_7   , KC_8   , KC_9   , KC_PMNS, KC_BSPC,
     KC_ESC , KC_5   , KC_6   , KC_7   , KC_8   , KC_NO  , KC_NO  , KC_4   , KC_5   , KC_6   , KC_PPLS, KC_HOME,
     KC_LSFT, KC_9   , KC_0   , KC_NO  , KC_NO  , KC_NO  , KC_NO  , KC_1   , KC_2   , KC_3   , KC_UP  , KC_END ,
-    KC_LCTL, KC_LGUI, KC_LALT, NMNVLK ,           NUMNAV , KC_0            , KC_PDOT, KC_LEFT, KC_DOWN, KC_RGHT
+    KC_LCTL, KC_LGUI, KC_LALT, NAVLOCK, NUMNAV , KC_0   , KC_0   , SHIFTED, KC_PDOT, KC_LEFT, KC_DOWN, KC_RGHT
 ),
 
 /* Shifted
@@ -133,32 +136,32 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * |------+------+------+------+------+------+------+------+------+------+------+------|
  * | LSft |      |   ^  |   ^  |      |      |      |      |      |      |      | RSft |
  * |------+------+------+------+------+------+------+------+------+------+------+------|
- * | LCtl | LGUI | LAlt |      |    Space    |   SHIFTED   | RAlt |      |      |      |
+ * | LCtl | LGUI | LAlt |NAVLCK|NUMNAV|    Space    |SHFTED| RAlt |      |      |      |
  * `-----------------------------------------------------------------------------------'
  */
-[_SHIFTED] = LAYOUT_planck_2x2u(
+[_SHIFTED] = LAYOUT_planck_grid(
     KC_GRV,  KC_EXLM, KC_AT,   KC_HASH, KC_PERC, KC_ASTR, KC_NO,   KC_LPRN, KC_RPRN, KC_MINS, KC_EQL,  KC_BSPC,
     KC_ESC,  KC_AMPR, KC_ASTR, KC_DLR,  KC_NO,   KC_NO,   KC_NO,   KC_LBRC, KC_RBRC, KC_BSLS, KC_QUOT, KC_ENT,
     KC_LSFT, KC_NO,   KC_CIRC, KC_CIRC, KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_RSFT,
-    KC_LCTL, KC_LGUI, KC_LALT, KC_NO,            KC_SPC,  SHIFTED,          KC_RALT, KC_NO,   KC_NO,   KC_NO
+    KC_LCTL, KC_LGUI, KC_LALT, KC_NO,   NUMNAV,  KC_SPC,  KC_SPC,  SHIFTED, KC_RALT, KC_NO,   KC_NO,   KC_NO
 ),
 
 /* Function
  * ,-----------------------------------------------------------------------------------.
  * |  F1  |  F2  |  F3  |  F4  |  F5  |  F6  |  F7  |  F8  |  F9  | F10  | F11  | F12  |
  * |------+------+------+------+------+------+------+------+------+------+------+------|
- * | Esc  |      |      |      | Brt- | Brt+ |      |      |      |      |      | Pscr |
+ * | Esc  |      |RGBTOG| Pat- | Hue+ | Hue- | Sat+ | Sat- | Brt+ | Brt- |      | Pscr |
  * |------+------+------+------+------+------+------+------+------+------+------+------|
- * | LSft |      |      |      | Vol- | Vol+ | Rwnd | Ffwd |      |      |      | Task |
+ * | LSft |      |      |      | Vol- | Vol+ | Rwnd | Ffwd |      |      |      | Del  |
  * |------+------+------+------+------+------+------+------+------+------+------+------|
- * | LCtl | LGUI | LAlt |      |    Mute     |    Play     |      |      |  Fn  | CAD  |
+ * | LCtl | LGUI | LAlt |      | Mute |    Space    | Play |      |      |  Fn  | ADJS |
  * `-----------------------------------------------------------------------------------'
  */
-[_FUNCTION] = LAYOUT_planck_2x2u(
+[_FUNCTION] = LAYOUT_planck_grid(
     KC_F1,   KC_F2,   KC_F3,   KC_F4,   KC_F5,   KC_F6,   KC_F7,   KC_F8,   KC_F9,   KC_F10,  KC_F11,  KC_F12,
     KC_ESC,  XXXXXXX, RGB_TOG, RGB_MOD, RGB_HUI, RGB_HUD, RGB_SAI, RGB_SAD, RGB_VAI, RGB_VAD, XXXXXXX, KC_PSCR,
-    KC_LSFT, XXXXXXX, XXXXXXX, XXXXXXX, KC_VOLD, KC_VOLU, KC_MRWD, KC_MFFD, XXXXXXX, XXXXXXX, XXXXXXX, C(S(KC_ESC)),
-    KC_LCTL, KC_LGUI, KC_LALT, XXXXXXX,          KC_MUTE, KC_MPLY,          XXXXXXX, XXXXXXX, FUNCTION,LCA(KC_DEL)
+    KC_LSFT, XXXXXXX, XXXXXXX, XXXXXXX, KC_VOLD, KC_VOLU, KC_MRWD, KC_MFFD, XXXXXXX, XXXXXXX, XXXXXXX, KC_DEL,
+    KC_LCTL, KC_LGUI, KC_LALT, XXXXXXX, KC_MUTE, KC_SPC,  KC_SPC,  KC_MPLY, XXXXXXX, XXXXXXX, FUNCTION,ADJUST
 ),
 
 /* Adjust
@@ -172,11 +175,11 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * |QWERTY|GMNG1 |GMNG2 |      |             |             |      |      |      | ADJS |
  * `-----------------------------------------------------------------------------------'
  */
-[_ADJUST] = LAYOUT_planck_2x2u(
+[_ADJUST] = LAYOUT_planck_grid(
     NK_TOGG, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, RESET,
     SEC_1,   SEC_2,   XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, DEBUG,
     XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
-    QWERTY,  GAME_SPC,GAME_WASD,XXXXXXX,         XXXXXXX, XXXXXXX,          XXXXXXX, XXXXXXX, XXXXXXX, ADJUST
+    QWERTY,  GAME_SPC,GAME_WASD,XXXXXXX,XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, ADJUST
 )
 
 };
