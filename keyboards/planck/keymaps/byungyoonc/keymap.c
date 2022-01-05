@@ -17,7 +17,6 @@
 
 #include QMK_KEYBOARD_H
 
-
 enum planck_layers {
   _QWERTY,
   _GAME_SPC,
@@ -200,31 +199,76 @@ const key_override_t **key_overrides = (const key_override_t *[]){
     NULL
 };
 
+#if defined(RGBLIGHT_ENABLE)
+// RGB LIGHT LAYER ADJUSTMENTS
+const rgblight_segment_t PROGMEM my_caps_layer[] = RGBLIGHT_LAYER_SEGMENTS(
+        {0, 9, 0, 255, 255}
+);
+
+const rgblight_segment_t PROGMEM my_g1_layer[] = RGBLIGHT_LAYER_SEGMENTS(
+        {0, 9, 128, 196, 255}
+);
+
+const rgblight_segment_t PROGMEM my_g2_layer[] = RGBLIGHT_LAYER_SEGMENTS(
+        {0, 9, 213, 196, 255}
+);
+
+const rgblight_segment_t PROGMEM my_nav_layer[] = RGBLIGHT_LAYER_SEGMENTS(
+        {2, 1, 43, 196, 255}
+);
+
+const rgblight_segment_t PROGMEM my_numnav_layer[] = RGBLIGHT_LAYER_SEGMENTS(
+        {0, 9, 43, 196, 255}
+);
+
+const rgblight_segment_t PROGMEM my_shifted_layer[] = RGBLIGHT_LAYER_SEGMENTS(
+        {0, 9, 171, 196, 255}
+);
+
+const rgblight_segment_t PROGMEM my_function_layer[] = RGBLIGHT_LAYER_SEGMENTS(
+        {0, 9, 0, 196, 255}
+);
+
+const rgblight_segment_t PROGMEM my_adjust_layer[] = RGBLIGHT_LAYER_SEGMENTS(
+        {0, 9, 85, 196, 255}
+);
+
+const rgblight_segment_t* const PROGMEM my_rgb_layers[] = RGBLIGHT_LAYERS_LIST(
+    my_caps_layer,
+    my_g1_layer,
+    my_g2_layer,
+    my_nav_layer,
+    my_numnav_layer,
+    my_shifted_layer,
+    my_function_layer,
+    my_adjust_layer
+);
+
+void keyboard_post_init_user(void) {
+    // Enable the LED layers
+    rgblight_layers = my_rgb_layers;
+}
+
 bool led_update_user(led_t led_state) {
-    static uint8_t caps_state = 0;
-    static uint8_t numl_state = 0;
-    if (caps_state != led_state.caps_lock) {
-        if (led_state.caps_lock) {
-            rgblight_mode_noeeprom(RGBLIGHT_MODE_STATIC_LIGHT);
-            rgblight_sethsv_noeeprom(0, 212, 255);
-        }
-        else {
-            rgblight_reload_from_eeprom();
-        }
-        caps_state = led_state.caps_lock;
-    }
-    if (numl_state != led_state.num_lock) {
-        if (!led_state.num_lock) {
-            rgblight_mode_noeeprom(RGBLIGHT_MODE_STATIC_LIGHT);
-            rgblight_sethsv_noeeprom(128, 212, 255);
-        }
-        else {
-            rgblight_reload_from_eeprom();
-        }
-        numl_state = led_state.num_lock;
-    }
+    rgblight_set_layer_state(0, led_state.caps_lock);
     return true;
 }
+
+layer_state_t default_layer_state_set_user(layer_state_t state) {
+    rgblight_set_layer_state(1, layer_state_cmp(state, _GAME_SPC));
+    rgblight_set_layer_state(2, layer_state_cmp(state, _GAME_WASD));
+    return state;
+}
+
+layer_state_t layer_state_set_user(layer_state_t state) {
+    rgblight_set_layer_state(3, layer_state_cmp(state, _NAV));
+    rgblight_set_layer_state(4, layer_state_cmp(state, _NUMNAV));
+    rgblight_set_layer_state(5, layer_state_cmp(state, _SHIFTED));
+    rgblight_set_layer_state(6, layer_state_cmp(state, _FUNCTION));
+    rgblight_set_layer_state(7, layer_state_cmp(state, _ADJUST));
+    return state;
+}
+#endif
 
 #if (__has_include("secrets.h") && !defined(NO_SECRETS))
 #    include "secrets.h"
