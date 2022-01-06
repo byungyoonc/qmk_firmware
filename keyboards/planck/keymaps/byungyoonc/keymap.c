@@ -202,15 +202,17 @@ const key_override_t **key_overrides = (const key_override_t *[]){
 #if defined(RGBLIGHT_ENABLE)
 // RGB LIGHT LAYER ADJUSTMENTS
 const rgblight_segment_t PROGMEM my_caps_layer[] = RGBLIGHT_LAYER_SEGMENTS(
-        {0, 9, 0, 255, 255}
+        {4, 2, 0, 255, 255}
 );
 
 const rgblight_segment_t PROGMEM my_g1_layer[] = RGBLIGHT_LAYER_SEGMENTS(
-        {0, 9, 128, 196, 255}
+        {2, 2, 128, 196, 255},
+        {6, 2, 128, 196, 255}
 );
 
 const rgblight_segment_t PROGMEM my_g2_layer[] = RGBLIGHT_LAYER_SEGMENTS(
-        {0, 9, 213, 196, 255}
+        {2, 2, 213, 196, 255},
+        {6, 2, 213, 196, 255}
 );
 
 const rgblight_segment_t PROGMEM my_nav_layer[] = RGBLIGHT_LAYER_SEGMENTS(
@@ -218,19 +220,19 @@ const rgblight_segment_t PROGMEM my_nav_layer[] = RGBLIGHT_LAYER_SEGMENTS(
 );
 
 const rgblight_segment_t PROGMEM my_numnav_layer[] = RGBLIGHT_LAYER_SEGMENTS(
-        {0, 9, 43, 196, 255}
+        {8, 1, 43, 196, 255}
 );
 
 const rgblight_segment_t PROGMEM my_shifted_layer[] = RGBLIGHT_LAYER_SEGMENTS(
-        {0, 9, 171, 196, 255}
+        {1, 1, 171, 196, 255}
 );
 
 const rgblight_segment_t PROGMEM my_function_layer[] = RGBLIGHT_LAYER_SEGMENTS(
-        {0, 9, 0, 196, 255}
+        {2, 1, 0, 196, 255}
 );
 
 const rgblight_segment_t PROGMEM my_adjust_layer[] = RGBLIGHT_LAYER_SEGMENTS(
-        {0, 9, 85, 196, 255}
+        {2, 1, 85, 196, 255}
 );
 
 const rgblight_segment_t* const PROGMEM my_rgb_layers[] = RGBLIGHT_LAYERS_LIST(
