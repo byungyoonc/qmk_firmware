@@ -16,6 +16,7 @@
  */
 
 #include QMK_KEYBOARD_H
+#include "byungyoonc.h"
 
 enum planck_layers {
   _QWERTY,
@@ -26,16 +27,6 @@ enum planck_layers {
   _SHIFTED,
   _FUNCTION,
   _ADJUST
-};
-
-enum planck_keycodes {
-  QWERTY = SAFE_RANGE,
-  GAME_SPC,
-  GAME_WASD,
-  SEC_1,
-  SEC_2,
-  BACKLIT,
-  EXT_PLV
 };
 
 #define NUMNAV MO(_NUMNAV)
@@ -177,7 +168,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  */
 [_ADJUST] = LAYOUT_planck_grid(
     NK_TOGG, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, RESET,
-    SEC_1,   SEC_2,   XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, DEBUG,
+    KC_SEC1, KC_SEC2, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, DEBUG,
     XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
     QWERTY,  GAME_SPC,GAME_WASD,XXXXXXX,XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, ADJUST
 )
@@ -271,21 +262,3 @@ layer_state_t layer_state_set_user(layer_state_t state) {
     return state;
 }
 #endif
-
-#if (__has_include("secrets.h") && !defined(NO_SECRETS))
-#    include "secrets.h"
-#else
-static const char *const secrets[] = {"test1", "test2"};
-#endif
-
-bool process_record_user(uint16_t keycode, keyrecord_t *record) {
-    switch (keycode) {
-        case SEC_1 ... SEC_2:
-            if (!record->event.pressed) {
-                send_string_with_delay(secrets[keycode - SEC_1], 20);
-            }
-            return false;
-            break;
-    }
-    return true;
-}

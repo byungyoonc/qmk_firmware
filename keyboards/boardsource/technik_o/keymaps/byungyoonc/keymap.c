@@ -16,7 +16,7 @@
  */
 
 #include QMK_KEYBOARD_H
-
+#include "byungyoonc.h"
 
 enum layers {
   _QWERTY,
@@ -26,13 +26,6 @@ enum layers {
   _SHIFTED,
   _FUNCTION,
   _ADJUST
-};
-
-enum keycodes {
-  SEC_1 = SAFE_RANGE,
-  SEC_2,
-  BACKLIT,
-  EXT_PLV
 };
 
 #define NUMNAV MO(_NUMNAV)
@@ -217,7 +210,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  */
 [_ADJUST] = LAYOUT_ortho_4x12(
     NK_TOGG, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, RESET,
-    SEC_1,   SEC_2,   XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, DEBUG,
+    KC_SEC1, KC_SEC2, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, DEBUG,
     XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
     QWERTY,  GAME_SPC,GAME_WASD,XXXXXXX,XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, ADJUST
 )
@@ -241,24 +234,6 @@ const key_override_t **key_overrides = (const key_override_t *[]){
 
 void matrix_output_unselect_delay(uint8_t line, bool key_pressed) {
     return;
-}
-
-#if (__has_include("secrets.h") && !defined(NO_SECRETS))
-#    include "secrets.h"
-#else
-static const char *const secrets[] = {"test1", "test2"};
-#endif
-
-bool process_record_user(uint16_t keycode, keyrecord_t *record) {
-    switch (keycode) {
-        case SEC_1 ... SEC_2:
-            if (!record->event.pressed) {
-                send_string_with_delay(secrets[keycode - SEC_1], 20);
-            }
-            return false;
-            break;
-    }
-    return true;
 }
 
 void rgb_matrix_indicators_advanced_user(uint8_t led_min, uint8_t led_max) {
