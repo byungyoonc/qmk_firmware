@@ -51,7 +51,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
 bool process_record_user_kb(uint16_t keycode, keyrecord_t *record) {
     if (record->event.pressed) {
-        rgblight_increase_hue();
+        //rgblight_increase_hue();
     }
     return true;
 }
