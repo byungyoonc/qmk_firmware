@@ -1,0 +1,4 @@
+DEBOUNCE_TYPE = sym_eager_pk
+MOUSEKEY_ENABLE = no
+
+CONSOLE_ENABLE = no
