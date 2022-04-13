@@ -18,7 +18,8 @@
 
 enum custom_keycodes {
     KC_SEC1 = SAFE_RANGE,
-    KC_SEC2
+    KC_SEC2,
+    KC_UPSL
 };
 
 #define KC_TASK LCTL(LSFT(KC_ESC))
