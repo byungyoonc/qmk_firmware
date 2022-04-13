@@ -20,70 +20,63 @@
 
 enum layers {
   _QWERTY,
-  _GAME_SPC,
-  _GAME_WASD,
-  _NUMNAV,
-  _SHIFTED,
-  _FUNCTION,
-  _ADJUST
+  _GAME_1,
+  _GAME_2,
+  _NUM,
+  _SYMBOL,
+  _ADJUST,
+  _ADJUST2
 };
 
-#define NUMNAV MO(_NUMNAV)
-#define SHIFTED MO(_SHIFTED)
-#define NMNVSPC LT(_NUMNAV, KC_SPC)
-#define SFTDSPC LT(_SHIFTED, KC_SPC)
-#define ADJUST_SPC LT(_ADJUST, KC_SPC)
-#define FUNCTION MO(_FUNCTION)
-#define ADJUST MO(_ADJUST)
+#define NUM MO(_NUM)
+#define SYMBOL MO(_SYMBOL)
+#define ADJUST MO(_ADJUST2)
 #define QWERTY DF(_QWERTY)
-#define GAME_SPC DF(_GAME_SPC)
-#define GAME_WASD DF(_GAME_WASD)
-#define LSFTCAP LT(_QWERTY, KC_LSFT)
-#define RSFTCAP LT(_QWERTY, KC_RSFT)
-#define NMNVLK TG(_NUMNAV)
+#define GAME_1 DF(_GAME_1)
+#define GAME_2 DF(_GAME_2)
 
 const uint8_t ledflags[][48] = {
 [_QWERTY] = {
     2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2,
     2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2,
-    2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2,
-    2, 2, 2, 2, 2, 1, 1, 2, 2, 2, 2, 2
+    2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 3, 2,
+    2, 2, 2, 2, 2, 0, 1, 2, 2, 3, 3, 3
 },
-[_GAME_SPC] = {
+[_GAME_1] = {
     0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
     0, 1, 2, 1, 0, 0, 0, 0, 1, 2, 1, 0,
     0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-    0, 0, 0, 0, 3, 0, 0, 3, 0, 0, 0, 0
+    0, 0, 0, 0, 3, 0, 0, 3, 0, 0, 0, 4
 },
-[_GAME_WASD] = {
+[_GAME_2] = {
     2, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 2,
     2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2,
-    2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2,
-    2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2
+    2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 3,
+    2, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 4
 },
-[_NUMNAV] = {
+[_NUM] = {
     2, 1, 1, 1, 1, 4, 4, 1, 1, 1, 1, 2,
-    2, 1, 1, 1, 1, 0, 0, 1, 1, 1, 1, 2,
-    2, 1, 1, 0, 0, 0, 0, 1, 1, 1, 3, 2,
-    2, 2, 2, 2, 8, 1, 1, 2, 1, 3, 3, 3
+    2, 1, 1, 1, 1, 0, 0, 1, 1, 1, 1, 3,
+    2, 1, 1, 0, 0, 0, 0, 1, 1, 1, 3, 3,
+    2, 2, 2, 2, 8, 0, 1, 2, 1, 3, 3, 3
 },
-[_SHIFTED] = {
+[_SYMBOL] = {
     1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 2,
     2, 1, 1, 1, 1, 0, 0, 1, 1, 1, 1, 2,
-    2, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 2,
-    2, 2, 2, 2, 2, 1, 1, 8, 2, 0, 0, 0
-},
-[_FUNCTION] = {
-    3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3,
-    2, 0, 1, 1, 1, 1, 1, 1, 1, 1, 0, 2,
-    2, 0, 0, 0, 1, 1, 1, 1, 0, 0, 0, 2,
-    2, 2, 2, 0, 1, 1, 1, 1, 2, 0, 8, 2
+    2, 0, 1, 1, 0, 0, 0, 0, 0, 0, 1, 2,
+    2, 2, 2, 2, 2, 0, 1, 8, 2, 0, 0, 0
 },
 [_ADJUST] = {
-    3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 4,
-    1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 4,
-    0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-    5, 6, 7, 0, 0, 0, 0, 0, 0, 0, 0, 8
+    3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3,
+    2, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 2,
+    2, 5, 6, 7, 1, 1, 1, 1, 0, 0, 0, 0,
+    2, 2, 2, 1, 8, 0, 1, 8, 1, 4, 4, 0
+},
+[_ADJUST2] = {
+    3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3,
+    2, 4, 4, 1, 1, 1, 1, 1, 1, 0, 0, 2,
+    2, 5, 6, 7, 1, 1, 1, 1, 0, 0, 0, 0,
+    2, 2, 2, 1, 2, 0, 1, 2, 1, 4, 4, 8
 }
 };
 
@@ -93,140 +86,127 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * ,-----------------------------------------------------------------------------------.
  * | Tab  |   Q  |   W  |   E  |   R  |   T  |   Y  |   U  |   I  |   O  |   P  | Bksp |
  * |------+------+------+------+------+------+------+------+------+------+------+------|
- * | Esc  |   A  |   S  |   D  |   F  |   G  |   H  |   J  |   K  |   L  |   ;  |Enter |
+ * | Esc  |   A  |   S  |   D  |   F  |   G  |   H  |   J  |   K  |   L  |   ;  |Return|
  * |------+------+------+------+------+------+------+------+------+------+------+------|
- * | LSft |   Z  |   X  |   C  |   V  |   B  |   N  |   M  |   ,  |   .  |   /  | RSft |
+ * | LSft |   Z  |   X  |   C  |   V  |   B  |   N  |   M  |   ,  |   .  |  Up  | RSft |
  * |------+------+------+------+------+------+------+------+------+------+------+------|
- * | LCtl | LGUI | LAlt |NAVLCK|NUMNAV| Spce | Spce |SHFTED| RAlt |      |  Fn  | ADJS |
+ * | LCtl | LGUI | LAlt |Delete| NUM  |    Space    |SYMBOL| RAlt | Left | Down |Right |
  * `-----------------------------------------------------------------------------------'
  */
 [_QWERTY] = LAYOUT_ortho_4x12(
     KC_TAB,  KC_Q,    KC_W,    KC_E,    KC_R,    KC_T,    KC_Y,    KC_U,    KC_I,    KC_O,    KC_P,    KC_BSPC,
-    KC_ESC,  KC_A,    KC_S,    KC_D,    KC_F,    KC_G,    KC_H,    KC_J,    KC_K,    KC_L,    KC_SCLN, KC_ENT ,
-    KC_LSFT, KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,    KC_N,    KC_M,    KC_COMM, KC_DOT,  KC_SLSH, KC_RSFT,
-    KC_LCTL, KC_LGUI, KC_LALT, NMNVLK,  NUMNAV,  KC_SPC,  KC_SPC,  SHIFTED, KC_RALT, XXXXXXX, FUNCTION,ADJUST
+    KC_ESC,  KC_A,    KC_S,    KC_D,    KC_F,    KC_G,    KC_H,    KC_J,    KC_K,    KC_L,    KC_SCLN, KC_ENT,
+    KC_LSFT, KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,    KC_N,    KC_M,    KC_COMM, KC_DOT,  KC_UP,   KC_RSFT,
+    KC_LCTL, KC_LGUI, KC_LALT, KC_DEL,  NUM,   KC_SPC,  KC_SPC,    SYMBOL,  KC_RALT, KC_LEFT, KC_DOWN, KC_RGHT
 ),
 
 /* GAMING WITH SPLIT SPACE FUNCTIONS DIFFERENTLY
  * ,-----------------------------------------------------------------------------------.
  * | Tab  |   Q  |   W  |   E  |   R  |   T  |   Y  |   U  |   I  |   O  |   P  | Bksp |
  * |------+------+------+------+------+------+------+------+------+------+------+------|
- * |      |   A  |   S  |   D  |   F  |   G  |   H  |   J  |   K  |   L  |   ;  |Enter |
+ * |      |   A  |   S  |   D  |   F  |   G  |   H  |   J  |   K  |   L  |   ;  |Return|
  * |------+------+------+------+------+------+------+------+------+------+------+------|
- * | LSft |   Z  |   X  |   C  |   V  |   B  |   N  |   M  |   ,  |   .  |   /  | RSft |
+ * | LSft |   Z  |   X  |   C  |   V  |   B  |   N  |   M  |   ,  |  Up  |      | RSft |
  * |------+------+------+------+------+------+------+------+------+------+------+------|
- * | LCtl |      | LAlt |      |   F  | Spce | Spce |   J  | RAlt |      |  Fn  | ADJS |
+ * | LCtl |      | LAlt |Delete|   F  |    Space    |   J  | Left | Down |Right | ADJS |
  * `-----------------------------------------------------------------------------------'
  */
-[_GAME_SPC] = LAYOUT_ortho_4x12(
-    KC_TAB,  KC_Q,    KC_W,    KC_E,    KC_R,    KC_T,    KC_Y,    KC_U,    KC_I,    KC_O,    KC_P,    KC_BSPC,
-    XXXXXXX, KC_A,    KC_S,    KC_D,    KC_F,    KC_G,    KC_H,    KC_J,    KC_K,    KC_L,    KC_SCLN, KC_ENT ,
-    KC_LSFT, KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,    KC_N,    KC_M,    KC_COMM, KC_DOT,  KC_SLSH, KC_RSFT,
-    KC_LCTL, XXXXXXX, KC_LALT, XXXXXXX, KC_F,    KC_SPC,  KC_SPC,  KC_J,    KC_RALT, XXXXXXX, FUNCTION,ADJUST
+[_GAME_1] = LAYOUT_ortho_4x12(
+    KC_TAB,  _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______,
+    XXXXXXX, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______,
+    _______, _______, _______, _______, _______, _______, _______, _______, _______, KC_UP,   XXXXXXX, _______,
+    KC_LCTL, XXXXXXX, _______, _______, KC_F,    _______, _______, KC_J,    KC_LEFT, KC_DOWN, KC_RGHT, ADJUST
 ),
 
 /* GAMING WITH WASD, NUMROW
  * ,-----------------------------------------------------------------------------------.
  * | Esc  |   1  |   2  |   3  |   4  |   5  |   6  |   7  |   8  |   9  |   0  | Bksp |
  * |------+------+------+------+------+------+------+------+------+------+------+------|
- * | Tab  |   Q  |   W  |   E  |   R  |   T  |   Y  |  Up  |   I  |   O  |   P  |Enter |
+ * | Tab  |   Q  |   W  |   E  |   R  |   T  |   Y  |   U  |   I  |   O  |   P  |Return|
  * |------+------+------+------+------+------+------+------+------+------+------+------|
- * | LSft |   A  |   S  |   D  |   F  |   G  | Left | Down |Right |   L  |   ;  | ATAB |
+ * | LSft |   A  |   S  |   D  |   F  |   G  |   H  |   J  |   K  |   L  |   ;  | ATAB |
  * |------+------+------+------+------+------+------+------+------+------+------+------|
- * | LCtl |   Z  |   X  |   C  |   V  | Spce | Spce |   M  |   ,  |   .  |   /  | ADJS |
+ * | LCtl |   Z  |   X  |   C  |   V  |    Space    |   M  |   ,  |   .  |   /  | ADJS |
  * `-----------------------------------------------------------------------------------'
  */
-[_GAME_WASD] = LAYOUT_ortho_4x12(
+[_GAME_2] = LAYOUT_ortho_4x12(
     KC_ESC,  KC_1,    KC_2,    KC_3,    KC_4,    KC_5,    KC_6,    KC_7,    KC_8,    KC_9,    KC_0,    KC_BSPC,
-    KC_TAB,  KC_Q,    KC_W,    KC_E,    KC_R,    KC_T,    KC_Y,    KC_UP,   KC_I,    KC_O,    KC_P,    KC_ENT,
-    KC_LSFT, KC_A,    KC_S,    KC_D,    KC_F,    KC_G,    KC_LEFT, KC_DOWN, KC_RGHT, KC_L,    KC_SCLN, A(KC_TAB),
+    KC_TAB,  KC_Q,    KC_W,    KC_E,    KC_R,    KC_T,    KC_Y,    KC_U,    KC_I,    KC_O,    KC_P,    KC_ENT,
+    KC_LSFT, KC_A,    KC_S,    KC_D,    KC_F,    KC_G,    KC_H,    KC_J,    KC_K,    KC_L,    KC_SCLN, A(KC_TAB),
     KC_LCTL, KC_Z,    KC_X,    KC_C,    KC_V,    KC_SPC,  KC_SPC,  KC_M,    KC_COMM, KC_DOT,  KC_SLSH, ADJUST
 ),
 
-/* Num/Nav
+/* Num
  * ,-----------------------------------------------------------------------------------.
- * | Tab  |   1  |   2  |   3  |   4  |Caplck|Numlck|   7  |   8  |   9  | N-,/ | Bksp |
+ * |      |   1  |   2  |   3  |   4  |Caplck|Numlck|   7  |   8  |   9  | N-,/ |      |
  * |------+------+------+------+------+------+------+------+------+------+------+------|
- * | Esc  |   5  |   6  |   7  |   8  |      |      |   4  |   5  |   6  | N+,* | Home |
+ * |      |   5  |   6  |   7  |   8  |  XX  |  XX  |   4  |   5  |   6  | N+,* | Home |
  * |------+------+------+------+------+------+------+------+------+------+------+------|
- * | LSft |   9  |   0  |      |      |      |      |   1  |   2  |   3  |  Up  | End  |
+ * |      |   9  |   0  |  XX  |  XX  |  XX  |  XX  |   1  |   2  |   3  |      | End  |
  * |------+------+------+------+------+------+------+------+------+------+------+------|
- * | LCtl | LGUI | LAlt |NAVLCK|NUMNAV|   0  |   0  |SHFTED| Num. | Left | Down |Right |
+ * |      |      |      |      |      |      0      |      |   .  |      |      |      |
  * `-----------------------------------------------------------------------------------'
  */
-[_NUMNAV] = LAYOUT_ortho_4x12(
-    KC_TAB , KC_1   , KC_2   , KC_3   , KC_4   , KC_CAPS, KC_NLCK, KC_7   , KC_8   , KC_9   , KC_PMNS, KC_BSPC,
-    KC_ESC , KC_5   , KC_6   , KC_7   , KC_8   , KC_NO  , KC_NO  , KC_4   , KC_5   , KC_6   , KC_PPLS, KC_HOME,
-    KC_LSFT, KC_9   , KC_0   , KC_NO  , KC_NO  , KC_NO  , KC_NO  , KC_1   , KC_2   , KC_3   , KC_UP  , KC_END ,
-    KC_LCTL, KC_LGUI, KC_LALT, NMNVLK , NUMNAV , KC_0   , KC_0   , SHIFTED, KC_PDOT, KC_LEFT, KC_DOWN, KC_RGHT
+[_NUM] = LAYOUT_ortho_4x12(
+    _______, KC_1   , KC_2   , KC_3   , KC_4   , KC_CAPS, KC_NLCK, KC_7   , KC_8   , KC_9   , KC_PMNS, _______,
+    _______, KC_5   , KC_6   , KC_7   , KC_8   , XXXXXXX, XXXXXXX, KC_4   , KC_5   , KC_6   , KC_PPLS, KC_HOME,
+    _______, KC_9   , KC_0   , XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, KC_1   , KC_2   , KC_3   , _______, KC_END,
+    _______, _______, _______, _______, _______, KC_0   , KC_0   , _______, KC_PDOT, _______, _______, _______
 ),
 
-/* Shifted
+/* Symbol
  * ,-----------------------------------------------------------------------------------.
- * |   `  |   !  |   @  |   #  |   %  |   *  |      |   (  |   )  |   -  |   =  | Bksp |
+ * |   `  |   !  |   @  |   #  |   %  |   *  |  XX  |   (  |   )  |   -  |   =  |      |
  * |------+------+------+------+------+------+------+------+------+------+------+------|
- * | Esc  |   &  |   *  |   $  |      |      |      |   [  |   ]  |   \  |   '  |Enter |
+ * |      |   &  |   *  |   $  |  XX  |  XX  |  XX  |   [  |   ]  |   \  |   '  |      |
  * |------+------+------+------+------+------+------+------+------+------+------+------|
- * | LSft |      |   ^  |   ^  |      |      |      |      |      |      |      | RSft |
+ * |      |  XX  |   ^  |   ^  |  XX  |  XX  |  XX  |  XX  |  XX  |  XX  |   /  |      |
  * |------+------+------+------+------+------+------+------+------+------+------+------|
- * | LCtl | LGUI | LAlt |      |NUMNAV| Spce | Spce |SHFTED| RAlt |      |      |      |
+ * |      |      |      |      |      |    Space    |      |      |      |      |      |
  * `-----------------------------------------------------------------------------------'
  */
-[_SHIFTED] = LAYOUT_ortho_4x12(
-    KC_GRV,  KC_EXLM, KC_AT,   KC_HASH, KC_PERC, KC_ASTR, KC_NO,   KC_LPRN, KC_RPRN, KC_MINS, KC_EQL,  KC_BSPC,
-    KC_ESC,  KC_AMPR, KC_ASTR, KC_DLR,  KC_NO,   KC_NO,   KC_NO,   KC_LBRC, KC_RBRC, KC_BSLS, KC_QUOT, KC_ENT,
-    KC_LSFT, KC_NO,   KC_CIRC, KC_CIRC, KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_RSFT,
-    KC_LCTL, KC_LGUI, KC_LALT, KC_NO,   NUMNAV,  KC_SPC,  KC_SPC,  SHIFTED, KC_RALT, KC_NO,   KC_NO,   KC_NO
-),
-
-/* Function
- * ,-----------------------------------------------------------------------------------.
- * |  F1  |  F2  |  F3  |  F4  |  F5  |  F6  |  F7  |  F8  |  F9  | F10  | F11  | F12  |
- * |------+------+------+------+------+------+------+------+------+------+------+------|
- * | Esc  |      |RGBTOG| Pat- | Hue+ | Hue- | Sat+ | Sat- | Brt+ | Brt- |      | Pscr |
- * |------+------+------+------+------+------+------+------+------+------+------+------|
- * | LSft |      |      |      | Vol- | Vol+ | Rwnd | Ffwd |      |      |      | Del  |
- * |------+------+------+------+------+------+------+------+------+------+------+------|
- * | LCtl | LGUI | LAlt |      | Mute | Spce | Spce | Play |      |      |  Fn  | ADJS |
- * `-----------------------------------------------------------------------------------'
- */
-[_FUNCTION] = LAYOUT_ortho_4x12(
-    KC_F1,   KC_F2,   KC_F3,   KC_F4,   KC_F5,   KC_F6,   KC_F7,   KC_F8,   KC_F9,   KC_F10,  KC_F11,  KC_F12,
-    KC_ESC,  XXXXXXX, RGB_TOG, RGB_MOD, RGB_HUI, RGB_HUD, RGB_SAI, RGB_SAD, RGB_VAI, RGB_VAD, XXXXXXX, KC_PSCR,
-    KC_LSFT, XXXXXXX, XXXXXXX, XXXXXXX, KC_VOLD, KC_VOLU, KC_MRWD, KC_MFFD, XXXXXXX, XXXXXXX, XXXXXXX, KC_DEL,
-    KC_LCTL, KC_LGUI, KC_LALT, XXXXXXX, KC_MUTE, KC_SPC,  KC_SPC,  KC_MPLY, XXXXXXX, XXXXXXX, FUNCTION,ADJUST
+[_SYMBOL] = LAYOUT_ortho_4x12(
+    KC_GRV,  KC_EXLM, KC_AT,   KC_HASH, KC_PERC, KC_ASTR, XXXXXXX, KC_LPRN, KC_RPRN, KC_MINS, KC_EQL,  _______,
+    _______, KC_AMPR, KC_ASTR, KC_DLR,  XXXXXXX, XXXXXXX, XXXXXXX, KC_LBRC, KC_RBRC, KC_BSLS, KC_QUOT, _______,
+    _______, XXXXXXX, KC_CIRC, KC_CIRC, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, KC_SLSH, _______,
+    _______, _______, _______, _______, _______, KC_SPC,  KC_SPC,  _______, _______, _______, _______, _______
 ),
 
 /* Adjust
  * ,-----------------------------------------------------------------------------------.
- * |NK_TOG|      |      |      |      |      |      |      |      |      |      |Reset |
+ * |  F1  |  F2  |  F3  |  F4  |  F5  |  F6  |  F7  |  F8  |  F9  | F10  | F11  | F12  |
  * |------+------+------+------+------+------+------+------+------+------+------+------|
- * | SEC1 | SEC2 |      |      |      |      |      |      |      |      |      |Debug |
+ * |      | SEC1 | SEC2 |RGBTOG| Hue+ | Sat+ | Brt+ | Spd+ | Pat- |  XX  |  XX  | Pscr |
  * |------+------+------+------+------+------+------+------+------+------+------+------|
- * |      |      |      |      |      |      |      |      |      |      |      |      |
+ * |      |QWERTY|GMNG1 |GMNG2 | Vol- | Vol+ | Rwnd | Ffwd |  XX  |  XX  |  XX  |  XX  |
  * |------+------+------+------+------+------+------+------+------+------+------+------|
- * |QWERTY|GMNG1 |GMNG2 |      |             |             |      |      |      | ADJS |
+ * |      |      |      | Mute |      |    Reset    |      | Play |NK_TOG|Debug |  XX  |
  * `-----------------------------------------------------------------------------------'
  */
 [_ADJUST] = LAYOUT_ortho_4x12(
-    NK_TOGG, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, RESET,
-    KC_SEC1, KC_SEC2, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, DEBUG,
-    XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
-    QWERTY,  GAME_SPC,GAME_WASD,XXXXXXX,XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, ADJUST
+    KC_F1,   KC_F2,   KC_F3,   KC_F4,   KC_F5,   KC_F6,   KC_F7,   KC_F8,   KC_F9,   KC_F10,  KC_F11,  KC_F12,
+    _______, KC_SEC1, KC_SEC2, RGB_TOG, RGB_HUI, RGB_SAI, RGB_VAI, RGB_SPI, RGB_MOD, XXXXXXX, XXXXXXX, KC_PSCR,
+    _______, QWERTY,  GAME_1,  GAME_2,  KC_VOLD, KC_VOLU, KC_MRWD, KC_MFFD, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
+    _______, _______, _______, KC_MUTE, _______, RESET,   RESET,   _______, KC_MPLY, NK_TOGG, DEBUG,   XXXXXXX
+),
+
+[_ADJUST2] = LAYOUT_ortho_4x12(
+    KC_F1,   KC_F2,   KC_F3,   KC_F4,   KC_F5,   KC_F6,   KC_F7,   KC_F8,   KC_F9,   KC_F10,  KC_F11,  KC_F12,
+    _______, KC_SEC1, KC_SEC2, RGB_TOG, RGB_HUI, RGB_SAI, RGB_VAI, RGB_SPI, RGB_MOD, XXXXXXX, XXXXXXX, KC_PSCR,
+    _______, QWERTY,  GAME_1,  GAME_2,  KC_VOLD, KC_VOLU, KC_MRWD, KC_MFFD, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
+    _______, _______, _______, KC_MUTE, _______, RESET,   RESET,   _______, KC_MPLY, NK_TOGG, DEBUG,   ADJUST
 )
 
 };
 
 const key_override_t pmns_key_override = ko_make_basic(MOD_MASK_SHIFT, KC_PMNS, KC_PSLS);
 const key_override_t ppls_key_override = ko_make_basic(MOD_MASK_SHIFT, KC_PPLS, KC_PAST);
-const key_override_t delete_key_override = ko_make_basic(MOD_MASK_SHIFT, KC_BSPC, KC_DEL);
-const key_override_t one_key_override = ko_make_with_layers(MOD_MASK_SHIFT, KC_1, KC_F1, (1 << _GAME_WASD));
-const key_override_t tab_key_override = ko_make_with_layers(MOD_MASK_CTRL, KC_TAB, KC_ESC, (1 << _GAME_SPC));
+const key_override_t one_key_override = ko_make_with_layers(MOD_MASK_SHIFT, KC_1, KC_F1, (1 << _GAME_2));
+const key_override_t tab_key_override = ko_make_with_layers(MOD_MASK_CTRL, KC_TAB, KC_ESC, (1 << _GAME_1));
 
 const key_override_t **key_overrides = (const key_override_t *[]){
     &pmns_key_override,
     &ppls_key_override,
-    &delete_key_override,
     &one_key_override,
     &tab_key_override,
     NULL
@@ -256,4 +236,14 @@ void rgb_matrix_indicators_advanced_user(uint8_t led_min, uint8_t led_max) {
         rgb = palette[color_index];
         rgb_matrix_set_color(i, rgb.r, rgb.g, rgb.b);
     }
+    if (layer == _ADJUST || layer == _ADJUST2) {
+        rgb = palette[2];
+        uint8_t led_index = 35 + get_highest_layer(default_layer_state);
+        rgb_matrix_set_color(led_index, rgb.r, rgb.g, rgb.b);
+    }
+}
+
+layer_state_t layer_state_set_user(layer_state_t state) {
+    state = update_tri_layer_state(state, _NUM, _SYMBOL, _ADJUST);
+    return state;
 }
