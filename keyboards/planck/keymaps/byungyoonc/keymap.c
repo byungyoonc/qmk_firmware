@@ -174,22 +174,23 @@ uint16_t upslcode;
 
 bool process_record_user_kb(uint16_t keycode, keyrecord_t *record) {
     switch (keycode) {
-    case KC_A ... KC_Z:
-    case KC_SCLN:
-    case KC_COMM:
-    case KC_DOT:
+    case KC_A ... KC_0:
+    case KC_MINS ... KC_DOT:
         if (record->event.pressed) {
             key_timer = timer_read();
             was_last_tap_char = true;
         }
         break;
+    case KC_DEL:
+    case KC_BSPC:
+        if (record->event.pressed) {
+            key_timer = timer_read();
+        }
+        break;
     case KC_UPSL:
         if ((get_mods() & MOD_BIT(KC_RSFT)) == MOD_BIT(KC_RSFT)) {
-            if (record->event.pressed) {
-                register_code(KC_SLSH);
-            } else {
-                unregister_code(KC_SLSH);
-            }
+            upslcode = KC_SLSH;
+            was_last_tap_char = false;
         } else {
             if (record->event.pressed) {
                 if (was_last_tap_char) {
@@ -204,11 +205,13 @@ bool process_record_user_kb(uint16_t keycode, keyrecord_t *record) {
                         upslcode = KC_UP;
                     }
                 }
+            }
+        }
+        if (record->event.pressed) {
                 key_timer = timer_read();
                 register_code(upslcode);
             } else {
                 unregister_code(upslcode);
-            }
         }
         break;
     }
