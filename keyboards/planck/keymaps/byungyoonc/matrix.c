@@ -107,8 +107,8 @@ uint8_t matrix_scan(void) {
         }
 
         // need wait to settle pin state
-        //wait_us(20);
-        for (int i = 0; i < 20; i++) {
+        //wait_us(15);
+        for (int i = 0; i < 15; i++) {
             wait_cpuclock(STM32_SYSCLK / 1000000L);
         }
 
