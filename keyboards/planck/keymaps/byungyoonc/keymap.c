@@ -51,7 +51,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 [_QWERTY] = LAYOUT_planck_grid(
     KC_TAB,  KC_Q,    KC_W,    KC_E,    KC_R,    KC_T,    KC_Y,    KC_U,    KC_I,    KC_O,    KC_P,    KC_BSPC,
     KC_ESC,  KC_A,    KC_S,    KC_D,    KC_F,    KC_G,    KC_H,    KC_J,    KC_K,    KC_L,    KC_SCLN, KC_ENT,
-    KC_LSFT, KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,    KC_N,    KC_M,    KC_COMM, KC_DOT,  KC_UPSL, KC_RSFT,
+    KC_LSFT, KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,    KC_N,    KC_M,    KC_COMM, KC_DOT,  KC_UP,   KC_RSFT,
     KC_LCTL, KC_LGUI, KC_LALT, KC_DEL,  NUM,   KC_SPC,  KC_SPC,    SYMBOL,  KC_RALT, KC_LEFT, KC_DOWN, KC_RGHT
 ),
 
@@ -166,57 +166,6 @@ const key_override_t **key_overrides = (const key_override_t *[]){
     &tab_key_override,
     NULL
 };
-
-const uint16_t tap_term = 500;
-uint16_t key_timer;
-bool was_last_tap_char;
-uint16_t upslcode;
-
-bool process_record_user_kb(uint16_t keycode, keyrecord_t *record) {
-    switch (keycode) {
-    case KC_A ... KC_0:
-    case KC_MINS ... KC_DOT:
-        if (record->event.pressed) {
-            key_timer = timer_read();
-            was_last_tap_char = true;
-        }
-        break;
-    case KC_DEL:
-    case KC_BSPC:
-        if (record->event.pressed) {
-            key_timer = timer_read();
-        }
-        break;
-    case KC_UPSL:
-        if ((get_mods() & MOD_BIT(KC_RSFT)) == MOD_BIT(KC_RSFT)) {
-            upslcode = KC_SLSH;
-            was_last_tap_char = false;
-        } else {
-            if (record->event.pressed) {
-                if (was_last_tap_char) {
-                    if (timer_elapsed(key_timer) < tap_term) {
-                        upslcode = KC_SLSH;
-                    } else {
-                        upslcode = KC_UP;
-                    }
-                    was_last_tap_char = false;
-                } else {
-                    if (tap_term < timer_elapsed(key_timer)) {
-                        upslcode = KC_UP;
-                    }
-                }
-            }
-        }
-        if (record->event.pressed) {
-            key_timer = timer_read();
-            register_code(upslcode);
-        } else {
-            unregister_code(upslcode);
-        }
-        break;
-    }
-    return true;
-}
 
 #if defined(RGBLIGHT_ENABLE)
 // RGB LIGHT LAYER ADJUSTMENTS
