@@ -1,0 +1,77 @@
+// Copyright 2022 Choi Byungyoon (@Choi Byungyoon)
+// SPDX-License-Identifier: GPL-2.0-or-later
+
+#pragma once
+
+#include "config_common.h"
+
+#define PRODUCT Cornel Choc rv1
+
+#define MATRIX_COLS 6
+#define MATRIX_ROWS 10
+
+// Allows on-board reset switch double-tap to reset the MCU
+#define RP2040_BOOTLOADER_DOUBLE_TAP_RESET
+
+// Split settings
+#define SERIAL_USART_FULL_DUPLEX
+#define SERIAL_USART_TX_PIN GP2
+#define SERIAL_USART_RX_PIN GP3
+#define SERIAL_USART_PIN_SWAP
+#define SERIAL_USART_SPEED 921600
+#define CRC8_USE_TABLE
+#define CRC8_OPTIMIZE_SPEED
+#define SERIAL_PIO_USE_PIO1
+
+// RGB matrix settings
+#define RGB_DI_PIN GP0
+#define RGBLIGHT_ANIMATIONS
+#define RGB_MATRIX_KEYPRESSES
+#define RGBLED_NUM 54
+#define DRIVER_LED_TOTAL 54
+#define RGB_MATRIX_SPLIT { 27, 27 }
+#define RGB_MATRIX_MAXIMUM_BRIGHTNESS 175
+#define RGB_MATRIX_STARTUP_VAL RGB_MATRIX_MAXIMUM_BRIGHTNESS
+#define RGBLIGHT_HUE_STEP 8
+#define RGBLIGHT_SAT_STEP 8
+#define RGBLIGHT_VAL_STEP 8
+
+// RGB matrix animations
+#define ENABLE_RGB_MATRIX_ALPHAS_MODS
+#define ENABLE_RGB_MATRIX_GRADIENT_UP_DOWN
+#define ENABLE_RGB_MATRIX_GRADIENT_LEFT_RIGHT
+#define ENABLE_RGB_MATRIX_CYCLE_ALL
+#define ENABLE_RGB_MATRIX_CYCLE_LEFT_RIGHT
+#define ENABLE_RGB_MATRIX_CYCLE_UP_DOWN
+#define ENABLE_RGB_MATRIX_SOLID_REACTIVE_SIMPLE
+#define ENABLE_RGB_MATRIX_SOLID_REACTIVE
+#define ENABLE_RGB_MATRIX_SOLID_REACTIVE_WIDE
+#define ENABLE_RGB_MATRIX_SOLID_REACTIVE_MULTIWIDE
+#define ENABLE_RGB_MATRIX_SOLID_REACTIVE_CROSS
+#define ENABLE_RGB_MATRIX_SOLID_REACTIVE_MULTICROSS
+#define ENABLE_RGB_MATRIX_SOLID_REACTIVE_NEXUS
+#define ENABLE_RGB_MATRIX_SOLID_REACTIVE_MULTINEXUS
+#define ENABLE_RGB_MATRIX_SPLASH
+#define ENABLE_RGB_MATRIX_MULTISPLASH
+#define ENABLE_RGB_MATRIX_SOLID_SPLASH
+#define ENABLE_RGB_MATRIX_SOLID_MULTISPLASH
+
+#undef DEBOUNCE
+#define DEBOUNCE 20
+
+#define DEBUG_MATRIX_SCAN_RATE
+/*
+ * Feature disable options
+ *  These options are also useful to firmware size reduction.
+ */
+
+/* disable debug print */
+//#define NO_DEBUG
+
+/* disable print */
+//#define NO_PRINT
+
+/* disable action features */
+//#define NO_ACTION_LAYER
+//#define NO_ACTION_TAPPING
+//#define NO_ACTION_ONESHOT
