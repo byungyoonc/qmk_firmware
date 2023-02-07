@@ -34,6 +34,7 @@ enum planck_layers {
 #define ADJUST MO(_ADJUST2)
 #define QWERTY DF(_QWERTY)
 #define GAME_1 DF(_GAME_1)
+#define AGRGUI LGUI_T(KC_RALT)
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
@@ -43,16 +44,16 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * |------+------+------+------+------+------+------+------+------+------+------+------|
  * | LCtl |   A  |   S  |   D  |   F  |   G  |   H  |   J  |   K  |   L  |   ;  |Return|
  * |------+------+------+------+------+------+------+------+------+------+------+------|
- * | LSft |   Z  |   X  |   C  |   V  |   B  |   N  |   M  |   ,  |   .  |   /  | RSft |
+ * | LSft |   Z  |   X  |   C  |   V  |   B  |   N  |   M  |   ,  |   .  | Up/? | RSft |
  * |------+------+------+------+------+------+------+------+------+------+------+------|
- * |      |      |      | LAlt | NUM  |    Space    |SYMBOL| LGUI |      |      |      |
+ * | Esc  | Home | End  | LAlt | NUM  |    Space    |SYMBOL| RAlt | Left | Down | Rght |
  * `-----------------------------------------------------------------------------------'
  */
 [_QWERTY] = LAYOUT_planck_grid(
     KC_TAB,  KC_Q,    KC_W,    KC_E,    KC_R,    KC_T,    KC_Y,    KC_U,    KC_I,    KC_O,    KC_P,    KC_BSPC,
     KC_LCTL, KC_A,    KC_S,    KC_D,    KC_F,    KC_G,    KC_H,    KC_J,    KC_K,    KC_L,    KC_SCLN, KC_ENT,
-    KC_LSFT, KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,    KC_N,    KC_M,    KC_COMM, KC_DOT,  KC_SLSH, KC_RSFT,
-    XXXXXXX, XXXXXXX, XXXXXXX, KC_LALT, NUM,   KC_SPC,  KC_SPC,    SYMBOL,  KC_LGUI, XXXXXXX, XXXXXXX, XXXXXXX
+    KC_LSFT, KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,    KC_N,    KC_M,    KC_COMM, KC_DOT,  KC_UP,   KC_RSFT,
+    KC_ESC,  KC_HOME, KC_END,  KC_LALT, NUM,   KC_SPC,  KC_SPC,    SYMBOL,  AGRGUI,  KC_LEFT, KC_DOWN, KC_RGHT
 ),
 
 /* GAMING WITH SPLIT SPACE FUNCTIONS DIFFERENTLY
@@ -115,7 +116,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * |------+------+------+------+------+------+------+------+------+------+------+------|
  * |      |   &  |   *  |   $  |      |      |      |   [  |   ]  |   \  |   '  |      |
  * |------+------+------+------+------+------+------+------+------+------+------+------|
- * |      |      |   ^  |      |      |      |      |      | RAlt |      |   /  |      |
+ * |      |      |   ^  |      |      |      |      |      |      |      |   /  |      |
  * |------+------+------+------+------+------+------+------+------+------+------+------|
  * |      |      |      |      |      |    Space    |      |      |      |      |      |
  * `-----------------------------------------------------------------------------------'
@@ -123,7 +124,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 [_SYMBOL] = LAYOUT_planck_grid(
     KC_GRV,  KC_EXLM, KC_AT,   KC_HASH, KC_PERC, XXXXXXX, XXXXXXX, KC_LPRN, KC_RPRN, KC_MINS, KC_EQL,  KC_DEL,
     _______, KC_AMPR, KC_ASTR, KC_DLR,  XXXXXXX, XXXXXXX, XXXXXXX, KC_LBRC, KC_RBRC, KC_BSLS, KC_QUOT, _______,
-    _______, XXXXXXX, KC_CIRC, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, KC_RALT, XXXXXXX, KC_SLSH, _______,
+    _______, XXXXXXX, KC_CIRC, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, KC_SLSH, _______,
     _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______
 ),
 
@@ -156,11 +157,13 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
 const key_override_t pmns_key_override = ko_make_basic(MOD_MASK_SHIFT, KC_PMNS, KC_PSLS);
 const key_override_t ppls_key_override = ko_make_basic(MOD_MASK_SHIFT, KC_PPLS, KC_PAST);
+const key_override_t up_key_override = ko_make_with_layers(MOD_BIT(KC_RSFT), KC_UP, KC_QUES, (1 << _QWERTY));
 const key_override_t tab_key_override = ko_make_with_layers(MOD_MASK_CTRL, KC_TAB, KC_ESC, (1 << _GAME_1));
 
 const key_override_t **key_overrides = (const key_override_t *[]){
     &pmns_key_override,
     &ppls_key_override,
+    &up_key_override,
     &tab_key_override,
     NULL
 };
