@@ -1,10 +1,7 @@
-#pragma once
-
-#include "config_common.h"
-
 #ifdef DEBOUNCE
 #undef DEBOUNCE
-#define DEBOUNCE 40
 #endif
+#define DEBOUNCE 40
 
 #define MASTER_RIGHT
+#define SWAP_HANDS_ENABLE

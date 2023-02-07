@@ -23,7 +23,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * | Tab  |   Q  |   W  |   E  |   R  |   T  |                    |   Y  |   U  |   I  |   O  |   P  | Bksp |
  * |------+------+------+------+------+------|                    |------+------+------+------+------+------|
  * |LCTRL |   A  |   S  |   D  |   F  |   G  |-------.    ,-------|   H  |   J  |   K  |   L  |   ;  |Enter |
- * |------+------+------+------+------+------|   [   |    |    ]  |------+------+------+------+------+------|
+ * |------+------+------+------+------+------| SHMON |    | Menu  |------+------+------+------+------+------|
  * |LShift|   Z  |   X  |   C  |   V  |   B  |-------|    |-------|   N  |   M  |   ,  |   .  |   /  |RShift|
  * `-----------------------------------------/       /     \      \-----------------------------------------'
  *                   | LGUI | LAlt |LOWER | /Space  /       \Space \  |RAISE | RAlt | Menu |
@@ -35,7 +35,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   KC_ESC,   KC_1,   KC_2,    KC_3,    KC_4,    KC_5,                        KC_6,    KC_7,    KC_8,    KC_9,    KC_0,    KC_DEL,
   KC_TAB,   KC_Q,   KC_W,    KC_E,    KC_R,    KC_T,                        KC_Y,    KC_U,    KC_I,    KC_O,    KC_P,    KC_BSPC,
   KC_LCTL,  KC_A,   KC_S,    KC_D,    KC_F,    KC_G,                        KC_H,    KC_J,    KC_K,    KC_L,    KC_SCLN, KC_ENT,
-  KC_LSFT,  KC_Z,   KC_X,    KC_C,    KC_V,    KC_B,     KC_LBRC, KC_RBRC,  KC_N,    KC_M,    KC_COMM, KC_DOT,  KC_SLSH, KC_RSFT,
+  KC_LSFT,  KC_Z,   KC_X,    KC_C,    KC_V,    KC_B,     SH_MON,  KC_APP,   KC_N,    KC_M,    KC_COMM, KC_DOT,  KC_SLSH, KC_RSFT,
                              KC_LGUI, KC_LALT, LOWER,    KC_SPC,  KC_SPC,   RAISE,   KC_RALT, KC_APP
 ),
 /* LOWER
@@ -45,7 +45,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * |      | Home |  Up  | End  |      | Caps |                    |      |  P7  |  P8  |  P9  |  P-  |      |
  * |------+------+------+------+------+------|                    |------+------+------+------+------+------|
  * |   `  | Left | Down |Right |      |      |-------.    ,-------|      |  P4  |  P5  |  P6  |  P+  |      |
- * |------+------+------+------+------+------|   [   |    |    ]  |------+------+------+------+------+------|
+ * |------+------+------+------+------+------|       |    |       |------+------+------+------+------+------|
  * |      |      |      |      |      |      |-------|    |-------|      |  P1  |  P2  |  P3  |  P.  |      |
  * `-----------------------------------------/       /     \      \-----------------------------------------'
  *                   |      |      |LOWER | /       /       \  P0  \  |RAISE |      |      |
@@ -113,3 +113,16 @@ void matrix_output_unselect_delay(uint8_t line, bool key_pressed) {
 layer_state_t layer_state_set_user(layer_state_t state) {
    return update_tri_layer_state(state, _LOWER, _RAISE, _ADJUST);
 }
+
+const keypos_t PROGMEM hand_swap_config[MATRIX_ROWS][MATRIX_COLS] = {
+  {{0, 5}, {1, 5}, {2, 5}, {3, 5}, {4, 5}, {5, 5} },
+  {{0, 6}, {1, 6}, {2, 6}, {3, 6}, {4, 6}, {5, 6} },
+  {{0, 7}, {1, 7}, {2, 7}, {3, 7}, {4, 7}, {5, 7} },
+  {{0, 8}, {1, 8}, {2, 8}, {3, 8}, {4, 8}, {5, 8} },
+  {{0, 9}, {1, 9}, {2, 9}, {3, 9}, {4, 9}, {5, 9} },
+  {{0, 0}, {1, 0}, {2, 0}, {3, 0}, {4, 0}, {5, 0} },
+  {{0, 1}, {1, 1}, {2, 1}, {3, 1}, {4, 1}, {5, 1} },
+  {{0, 2}, {1, 2}, {2, 2}, {3, 2}, {4, 2}, {5, 2} },
+  {{0, 3}, {1, 3}, {2, 3}, {3, 3}, {4, 3}, {5, 3} },
+  {{0, 4}, {1, 4}, {2, 4}, {3, 4}, {4, 4}, {5, 4} },
+};
