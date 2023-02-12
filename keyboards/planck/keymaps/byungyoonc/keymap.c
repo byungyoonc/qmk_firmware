@@ -86,7 +86,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * `-----------------------------------------------------------------------------------'
  */
 [_NUM] = LAYOUT_planck_grid(
-    KC_F1,   KC_HOME, KC_UP  , KC_END,  KC_PGUP, KC_CAPS, KC_NLCK, KC_7   , KC_8   , KC_9   , KC_PMNS, KC_DEL,
+    KC_F1,   KC_HOME, KC_UP  , KC_END,  KC_PGUP, KC_CAPS, KC_NUM,  KC_7   , KC_8   , KC_9   , KC_PMNS, KC_DEL,
     _______, KC_LEFT, KC_DOWN, KC_RGHT, KC_PGDN, XXXXXXX, XXXXXXX, KC_4   , KC_5   , KC_6   , KC_PPLS, _______,
     _______, KC_ESC,  XXXXXXX, XXXXXXX, NPAD,    XXXXXXX, XXXXXXX, KC_1   , KC_2   , KC_3   , KC_PDOT, _______,
     _______, _______, _______, _______, _______, KC_0   , KC_0   , _______, _______, _______, _______, _______
@@ -142,14 +142,14 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 [_ADJUST] = LAYOUT_planck_grid(
     KC_F1,   KC_F2,   KC_F3,   KC_F4,   KC_F5,   KC_F6,   KC_F7,   KC_F8,   KC_F9,   KC_F10,  KC_F11,  KC_F12,
     _______, KC_SEC1, KC_SEC2, RGB_TOG, RGB_HUI, RGB_SAI, RGB_VAI, RGB_SPI, RGB_MOD, XXXXXXX, NK_TOGG, KC_PSCR,
-    _______, QWERTY,  GAME_1,  KC_MUTE, KC_VOLD, KC_VOLU, KC_MRWD, KC_MFFD, KC_MPLY, XXXXXXX, DEBUG,   _______,
+    _______, QWERTY,  GAME_1,  KC_MUTE, KC_VOLD, KC_VOLU, KC_MRWD, KC_MFFD, KC_MPLY, XXXXXXX, DB_TOGG, _______,
     _______, _______, _______, _______, _______, RESET,   RESET,   _______, _______, _______, _______, _______
 ),
 
 [_ADJUST2] = LAYOUT_planck_grid(
     KC_F1,   KC_F2,   KC_F3,   KC_F4,   KC_F5,   KC_F6,   KC_F7,   KC_F8,   KC_F9,   KC_F10,  KC_F11,  KC_F12,
     _______, KC_SEC1, KC_SEC2, RGB_TOG, RGB_HUI, RGB_SAI, RGB_VAI, RGB_SPI, RGB_MOD, XXXXXXX, NK_TOGG, KC_PSCR,
-    _______, QWERTY,  GAME_1,  KC_MUTE, KC_VOLD, KC_VOLU, KC_MRWD, KC_MFFD, KC_MPLY, XXXXXXX, DEBUG,   _______,
+    _______, QWERTY,  GAME_1,  KC_MUTE, KC_VOLD, KC_VOLU, KC_MRWD, KC_MFFD, KC_MPLY, XXXXXXX, DB_TOGG, _______,
     _______, _______, _______, _______, _______, RESET,   RESET,   _______, ADJUST, _______, _______, _______
 )
 
