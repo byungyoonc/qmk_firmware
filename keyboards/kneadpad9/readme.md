@@ -5,7 +5,7 @@
 The first project of Meow Electronics.
 3x3 directly connected macropad.
 
-* Keyboard Maintainer: [Choi Byungyoon](https://github.com/Choi Byungyoon)
+* Keyboard Maintainer: [Choi Byungyoon](https://github.com/byungyoonc)
 * Hardware Availability: Available open-sourced at https://github.com/byungyoonc/kneadpad9
 
 Make example for this keyboard (after setting up your build environment):
