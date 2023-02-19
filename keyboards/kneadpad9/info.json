@@ -1,0 +1,48 @@
+{
+    "manufacturer": "Choi Byungyoon",
+    "keyboard_name": "kneadpad9",
+    "maintainer": "Choi Byungyoon",
+    "bootloader": "rp2040",
+    "features": {
+        "bootmagic": true,
+        "command": false,
+        "console": false,
+        "extrakey": true,
+        "mousekey": true,
+        "nkro": true
+    },
+    "matrix_pins": {
+        "direct":
+        [
+            ["GP0", "GP1", "GP2"],
+            ["GP3", "GP4", "GP5"],
+            ["GP6", "GP7", "GP8"]
+        ]
+    },
+    "processor": "RP2040",
+    "url": "https://github.com/byungyoonc/kneadpad9",
+    "usb": {
+        "device_version": "1.0.0",
+        "pid": "0x0001",
+        "vid": "0x4D45"
+    },
+    "build": {
+        "debounce_type": "sym_eager_pk"
+    },
+    "debounce": 40,
+    "layouts": {
+        "LAYOUT_ortho_3x3": {
+            "layout": [
+                { "matrix": [0, 0], "x": 0, "y": 0 },
+                { "matrix": [0, 1], "x": 1, "y": 0 },
+                { "matrix": [0, 2], "x": 2, "y": 0 },
+                { "matrix": [1, 0], "x": 0, "y": 1 },
+                { "matrix": [1, 1], "x": 1, "y": 1 },
+                { "matrix": [1, 2], "x": 2, "y": 1 },
+                { "matrix": [2, 0], "x": 0, "y": 2 },
+                { "matrix": [2, 1], "x": 1, "y": 2 },
+                { "matrix": [2, 2], "x": 2, "y": 2 }
+            ]
+        }
+    }
+}
