@@ -41,6 +41,14 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
         }
         return false;
         break;
+    case KC_OSMC:
+#ifndef NO_ACTION_ONESHOT
+        if (!record->event.pressed) {
+            clear_oneshot_mods();
+        }
+#endif
+        return false;
+        break;
     }
     return process_record_user_kb(keycode, record);
 };

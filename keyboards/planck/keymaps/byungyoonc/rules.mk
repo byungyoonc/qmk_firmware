@@ -3,3 +3,4 @@ CUSTOM_MATRIX = yes
 
 SRC += matrix.c
 # CONSOLE_ENABLE = yes
+MOUSEKEY_ENABLE = yes

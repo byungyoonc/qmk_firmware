@@ -75,7 +75,7 @@ void matrix_init(void) {
     debounce_counters = (debounce_counter_t *)malloc(MATRIX_ROWS * MATRIX_COLS * sizeof(debounce_counter_t));
     memset(debounce_counters, 0, MATRIX_ROWS * MATRIX_COLS * sizeof(debounce_counter_t));
 
-    matrix_init_quantum();
+    matrix_init_user();
 }
 
 uint8_t matrix_scan(void) {
@@ -201,7 +201,7 @@ uint8_t matrix_scan(void) {
         }
     }
 
-    matrix_scan_quantum();
+    matrix_scan_user();
 
     return 1;
 }
