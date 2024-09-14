@@ -18,7 +18,7 @@
 #include QMK_KEYBOARD_H
 #include "byungyoonc.h"
 
-#define SENIPLY
+//#define SENIPLY
 //#define ACAI
 
 #if defined(SENIPLY)
@@ -129,11 +129,14 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 enum layers {
   _QWERTY,
   _NUM,
+  _MMO,
+  _MMOF,
   _SYMBOL,
   _ADJUST,
 };
 
 #define NUM MO(_NUM)
+#define MMO MO(_MMO)
 #define SYMBOL MO(_SYMBOL)
 #define QWERTY DF(_QWERTY)
 #define AGRGUI LGUI_T(KC_RALT)
@@ -155,18 +158,18 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     KC_TAB,  KC_Q,    KC_W,    KC_E,    KC_R,    KC_T,    KC_Y,    KC_U,    KC_I,    KC_O,    KC_P,    KC_BSPC,
     KC_LCTL, KC_A,    KC_S,    KC_D,    KC_F,    KC_G,    KC_H,    KC_J,    KC_K,    KC_L,    KC_SCLN, KC_ENT,
     KC_LSFT, KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,    KC_N,    KC_M,    KC_COMM, KC_DOT,  KC_UP,   KC_RSFT,
-    KC_ESC,  KC_HOME, KC_END,  KC_LALT, NUM,        KC_SPC,        SYMBOL,  AGRGUI,  KC_LEFT, KC_DOWN, KC_RGHT
+    MMO,     XXXXXXX, XXXXXXX, KC_LALT, NUM,        KC_SPC,        SYMBOL,  AGRGUI,  KC_LEFT, KC_DOWN, KC_RGHT
     ),
 
 /* Num
  * ,-----------------------------------------------------------------------------------.
- * |      | Home |  Up  | End  | PgUp |Caplck|Numlck|   7  |   8  |   9  | N-,/ |      |
+ * |  F1  | Home |  Up  | End  | PgUp |Caplck|Numlck|   7  |   8  |   9  | N-,/ | Del  |
  * |------+------+------+------+------+------+------+------+------+------+------+------|
  * |      | Left | Down | Right| PgDn |  XX  |  XX  |   4  |   5  |   6  | N+,* |      |
  * |------+------+------+------+------+------+------+------+------+------+------+------|
- * |      | Esc  |  XX  |  XX  |  XX  |  XX  |   0  |   1  |   2  |   3  |   .  |      |
+ * |      | Esc  |  XX  |  XX  |  XX  |  XX  |  XX  |   1  |   2  |   3  |   .  |      |
  * |------+------+------+------+------+------+------+------+------+------+------+------|
- * |      |      |      |      |      |  Spc |   0  |      |      |      |      |      |
+ * |      |      |      |      |      |      0      |      |      |      |      |      |
  * `-----------------------------------------------------------------------------------'
  */
 [_NUM] = LAYOUT_planck_mit(
@@ -174,6 +177,42 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     _______, KC_LEFT, KC_DOWN, KC_RGHT, KC_PGDN, XXXXXXX, XXXXXXX, KC_4   , KC_5   , KC_6   , KC_PPLS, _______,
     _______, KC_ESC,  XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, KC_1   , KC_2   , KC_3   , KC_PDOT, _______,
     _______, _______, _______, _______, _______,       KC_0,       _______, _______, _______, _______, _______
+),
+
+/* MMO
+ * ,-----------------------------------------------------------------------------------.
+ * |  Esc |   1  |   2  |   3  |   =  |      |      |      |      |      |      |      |
+ * |------+------+------+------+------+------+------+------+------+------+------+------|
+ * |      |   4  |   5  |   6  |   -  |      |      |      |      |      |      |      |
+ * |------+------+------+------+------+------+------+------+------+------+------+------|
+ * |      |   7  |   8  |   9  |   0  |      |      |      |      |      |      |      |
+ * |------+------+------+------+------+------+------+------+------+------+------+------|
+ * |   v  |      |      |      |      |             |      |      |      |      |      |
+ * `-----------------------------------------------------------------------------------'
+ */
+[_MMO] = LAYOUT_planck_mit(
+    KC_ESC,  KC_1,    KC_2,    KC_3,    KC_EQL,  _______, _______, _______, _______, _______, _______, _______,
+    _______, KC_4,    KC_5,    KC_6,    KC_MINS, _______, _______, _______, _______, _______, _______, _______,
+    _______, KC_7,    KC_8,    KC_9,    KC_0,    _______, _______, _______, _______, _______, _______, _______,
+    _______, _______, _______, _______, _______,      _______,     _______, _______, _______, _______, _______
+),
+
+/* MMO-F
+ * ,-----------------------------------------------------------------------------------.
+ * |  Esc |  F1  |  F2  |  F3  | F12  |      |      |      |      |      |      |      |
+ * |------+------+------+------+------+------+------+------+------+------+------+------|
+ * |      |  F4  |  F5  |  F6  | F11  |      |      |      |      |      |      |      |
+ * |------+------+------+------+------+------+------+------+------+------+------+------|
+ * |      |  F7  |  F8  |  F9  | F10  |      |      |      |      |      |      |      |
+ * |------+------+------+------+------+------+------+------+------+------+------+------|
+ * |   v  |      |      |      |   v  |             |      |      |      |      |      |
+ * `-----------------------------------------------------------------------------------'
+ */
+[_MMOF] = LAYOUT_planck_mit(
+    KC_ESC,  KC_F1,   KC_F2,   KC_F3,   KC_F12,  _______, _______, _______, _______, _______, _______, _______,
+    _______, KC_F4,   KC_F5,   KC_F6,   KC_F11,  _______, _______, _______, _______, _______, _______, _______,
+    _______, KC_F7,   KC_F8,   KC_F9,   KC_F10,  _______, _______, _______, _______, _______, _______, _______,
+    _______, _______, _______, _______, _______,      _______,     _______, _______, _______, _______, _______
 ),
 
 /* Symbol
@@ -184,7 +223,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * |------+------+------+------+------+------+------+------+------+------+------+------|
  * |      |  XX  |   ^  |   ^  |  XX  |  XX  |  XX  |  XX  |  XX  |  XX  |   /  |      |
  * |------+------+------+------+------+------+------+------+------+------+------+------|
- * |      |      |      |      |      |    Space    |      |      |      |      |      |
+ * |      |      |      |      |      |    Space    |   v  |      |      |      |      |
  * `-----------------------------------------------------------------------------------'
  */
 [_SYMBOL] = LAYOUT_planck_mit(
@@ -201,13 +240,13 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * |------+------+------+------+------+------+------+------+------+------+------+------|
  * |      |QWERTY|GMNG1 |GMNG2 | Vol- | Vol+ | Rwnd | Ffwd |  XX  |  XX  |  XX  |  XX  |
  * |------+------+------+------+------+------+------+------+------+------+------+------|
- * |      |      |      | Mute |      |    Reset    |      | Play |NK_TOG|Debug |  XX  |
+ * |      |      |      | Mute |   v  |    Reset    |   v  | Play |NK_TOG|Debug |  XX  |
  * `-----------------------------------------------------------------------------------'
  */
 [_ADJUST] = LAYOUT_planck_mit(
     KC_F1,   KC_F2,   KC_F3,   KC_F4,   KC_F5,   KC_F6,   KC_F7,   KC_F8,   KC_F9,   KC_F10,  KC_F11,  KC_F12,
     _______, KC_SEC1, KC_SEC2, RGB_TOG, RGB_HUI, RGB_SAI, RGB_VAI, RGB_SPI, RGB_MOD, XXXXXXX, XXXXXXX, KC_PSCR,
-    _______, XXXXXXX, XXXXXXX, XXXXXXX, KC_VOLD, KC_VOLU, KC_MRWD, KC_MFFD, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
+    _______, XXXXXXX, XXXXXXX, XXXXXXX, KC_VOLD, KC_VOLU, KC_MRWD, KC_MFFD, XXXXXXX, XXXXXXX, XXXXXXX, _______,
     _______, _______, _______, KC_MUTE, _______,      QK_BOOT,     _______, KC_MPLY, NK_TOGG, DB_TOGG, XXXXXXX
 ),
 };
@@ -227,9 +266,9 @@ const key_override_t **key_overrides = (const key_override_t *[]){
 layer_state_t layer_state_set_user(layer_state_t state) {
 #if defined(SENIPLY)
     state = update_tri_layer_state(state, _EXTEND, _SYMBOL, _FUNCTION);
-#elif
-    state = update_tri_layer_state(state, _NUM, _SYMBOL, _ADJUST);
 #endif
+    state = update_tri_layer_state(state, _NUM, _SYMBOL, _ADJUST);
+    state = update_tri_layer_state(state, _MMO, _NUM, _MMOF);
     return state;
 }
 
