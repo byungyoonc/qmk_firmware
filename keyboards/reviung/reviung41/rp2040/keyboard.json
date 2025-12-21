@@ -1,0 +1,27 @@
+{
+    "processor": "RP2040",
+    "bootloader": "rp2040",
+    "rgblight": {
+        "layers": {
+            "enabled": true,
+            "max": 10
+        }
+    },
+    "build": {
+        "debounce_type": "sym_eager_pk",
+        "firmware_format": "uf2"
+    },
+    "ws2812": {
+        "driver": "vendor",
+        "pin": "GP0"
+    },
+    "features": {
+        "nkro": true
+    },
+    "debounce": 40,
+    "matrix_pins": {
+        "cols": ["GP4", "GP5", "GP6", "GP7", "GP8", "GP9"],
+        "rows": ["GP29", "GP28", "GP27", "GP26", "GP22", "GP20", "GP23"]
+    },
+    "diode_direction": "COL2ROW"
+}
