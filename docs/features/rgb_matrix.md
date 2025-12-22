@@ -392,6 +392,7 @@ const char* effect_name = rgb_matrix_get_mode_name(rgb_matrix_get_mode());
 ```c
 #define RGB_MATRIX_MODE_NAME_ENABLE // enables rgb_matrix_get_mode_name()
 #define RGB_MATRIX_KEYRELEASES // reactive effects respond to keyreleases (instead of keypresses)
+#define RGB_MATRIX_KEYHOLDS // reactive effects respond to both keypress and keyreleases; they stay on while hold
 #define RGB_MATRIX_TIMEOUT 0 // number of milliseconds to wait until rgb automatically turns off
 #define RGB_MATRIX_SLEEP // turn off effects when suspended
 #define RGB_MATRIX_LED_PROCESS_LIMIT (RGB_MATRIX_LED_COUNT + 4) / 5 // limits the number of LEDs to process in an animation per task run (increases keyboard responsiveness)

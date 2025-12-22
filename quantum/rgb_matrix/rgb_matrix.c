@@ -91,6 +91,9 @@ static uint32_t rgb_timer_buffer;
 #ifdef RGB_MATRIX_KEYREACTIVE_ENABLED
 static last_hit_t last_hit_buffer;
 #endif // RGB_MATRIX_KEYREACTIVE_ENABLED
+#ifdef RGB_MATRIX_KEYHOLDS
+static bool is_hit[RGB_MATRIX_LED_COUNT];
+#endif
 
 // split rgb matrix
 #if defined(RGB_MATRIX_SPLIT)
@@ -187,9 +190,9 @@ void rgb_matrix_handle_key_event(uint8_t row, uint8_t col, bool pressed) {
     uint8_t led[LED_HITS_TO_REMEMBER];
     uint8_t led_count = 0;
 
-#    if defined(RGB_MATRIX_KEYRELEASES)
+#    if defined(RGB_MATRIX_KEYRELEASES) && !defined(RGB_MATRIX_KEYHOLDS)
     if (!pressed)
-#    elif defined(RGB_MATRIX_KEYPRESSES)
+#    elif defined(RGB_MATRIX_KEYPRESSES) && !defined(RGB_MATRIX_KEYHOLDS)
     if (pressed)
 #    endif // defined(RGB_MATRIX_KEYRELEASES)
     {
@@ -210,6 +213,9 @@ void rgb_matrix_handle_key_event(uint8_t row, uint8_t col, bool pressed) {
         last_hit_buffer.y[index]     = g_led_config.point[led[i]].y;
         last_hit_buffer.index[index] = led[i];
         last_hit_buffer.tick[index]  = 0;
+#       if defined(RGB_MATRIX_KEYHOLDS)
+        is_hit[led[i]] = pressed;
+#       endif
         last_hit_buffer.count++;
     }
 #endif // RGB_MATRIX_KEYREACTIVE_ENABLED
@@ -275,7 +281,13 @@ static void rgb_task_timers(void) {
             last_hit_buffer.count--;
             continue;
         }
+#       ifdef RGB_MATRIX_KEYHOLDS
+        if (!is_hit[last_hit_buffer.index[i]]) {
+#       endif
         last_hit_buffer.tick[i] += deltaTime;
+#       ifdef RGB_MATRIX_KEYHOLDS
+        }
+#       endif
     }
 #endif // RGB_MATRIX_KEYREACTIVE_ENABLED
 }
@@ -500,6 +512,12 @@ void rgb_matrix_init(void) {
     for (uint8_t i = 0; i < LED_HITS_TO_REMEMBER; ++i) {
         last_hit_buffer.tick[i] = UINT16_MAX;
     }
+
+#   ifdef RGB_MATRIX_KEYHOLDS
+    for (uint8_t i = 0; i < RGB_MATRIX_LED_COUNT; ++i) {
+        is_hit[i] = false;
+    }
+#   endif
 #endif // RGB_MATRIX_KEYREACTIVE_ENABLED
 
     eeconfig_init_rgb_matrix();
