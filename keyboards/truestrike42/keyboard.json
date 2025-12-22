@@ -4,7 +4,7 @@
     "maintainer": "byungyoonc",
     "bootloader": "rp2040",
     "build": {
-        "debounce_type": "asym_eager_defer_pk"
+        "debounce_type": "sym_eager_pk"
     },
     "diode_direction": "COL2ROW",
     "dynamic_keymap": {
@@ -119,8 +119,8 @@
     "url": "https://github.com/byungyoonc/TrueStrike42",
     "usb": {
         "device_version": "1.0.0",
-        "pid": "0x0000",
-        "vid": "0x5A53"
+        "pid": "0x5453",
+        "vid": "0x4243"
     },
     "ws2812": {
         "driver": "vendor",
